@@ -2,11 +2,9 @@ package com.posada.santiago.alphapostsandcomments.domain;
 
 import co.com.sofka.domain.generic.EventChange;
 import com.posada.santiago.alphapostsandcomments.domain.events.PostCreated;
-import com.posada.santiago.alphapostsandcomments.domain.values.Title;
+import com.posada.santiago.alphapostsandcomments.domain.events.TitleChanged;
+import com.posada.santiago.alphapostsandcomments.domain.values.*;
 import com.posada.santiago.alphapostsandcomments.domain.events.CommentAdded;
-import com.posada.santiago.alphapostsandcomments.domain.values.Author;
-import com.posada.santiago.alphapostsandcomments.domain.values.CommentId;
-import com.posada.santiago.alphapostsandcomments.domain.values.Content;
 
 import java.util.ArrayList;
 
@@ -23,5 +21,9 @@ public class PostChange extends EventChange {
             Comment comment = new Comment(CommentId.of(event.getId()), new Author(event.getAuthor()), new Content(event.getContent()));
             post.comments.add(comment);
         });
+
+        apply((TitleChanged event)-> post.title = new Title(event.getTitle())
+        );
+
     }
 }

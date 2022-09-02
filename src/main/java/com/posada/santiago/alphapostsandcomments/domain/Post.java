@@ -3,6 +3,7 @@ package com.posada.santiago.alphapostsandcomments.domain;
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.posada.santiago.alphapostsandcomments.domain.events.PostCreated;
+import com.posada.santiago.alphapostsandcomments.domain.events.TitleChanged;
 import com.posada.santiago.alphapostsandcomments.domain.values.*;
 import com.posada.santiago.alphapostsandcomments.domain.events.CommentAdded;
 
@@ -41,4 +42,11 @@ public class Post extends AggregateEvent<PostId> {
         Objects.requireNonNull(content);
         appendChange(new CommentAdded(id.value(), author.value(), content.value())).apply();
     }
+
+    public void changeTitle(Title title){
+        Objects.requireNonNull(title);
+        appendChange(new TitleChanged(title.value())).apply();
+    }
+
+
 }
