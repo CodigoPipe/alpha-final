@@ -15,7 +15,6 @@ import reactor.core.publisher.Mono;
 public class ChangeTitleUseCase extends UseCaseForCommand<ChangeTitle> {
 
     private final DomainEventRepository repository;
-
     private final EventBus bus;
 
     public ChangeTitleUseCase(DomainEventRepository repository, EventBus bus) {
