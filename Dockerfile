@@ -1,4 +1,4 @@
 FROM openjdk:11.0.14
 EXPOSE 8080
-ADD target/alpha-post-comments.jar alpha-post-comments.jar
-ENTRYPOINT ["java", "-jar", "/alpha-post-comments.jar"]
+ADD target/alpha-post-comments-0.0.1-SNAPSHOT.jar alpha-post-comments-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java", "-jar", "/alpha-post-comments-0.0.1-SNAPSHOT.jar"]

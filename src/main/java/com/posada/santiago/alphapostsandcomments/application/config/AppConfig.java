@@ -7,6 +7,7 @@ import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 import org.springframework.web.reactive.config.WebFluxConfigurerComposite;
 
+
 @Configuration
 public class AppConfig {
     @Bean
@@ -21,3 +22,5 @@ public class AppConfig {
         };
     }
 }
+
+
