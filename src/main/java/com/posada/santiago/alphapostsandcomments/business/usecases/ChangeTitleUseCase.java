@@ -7,10 +7,11 @@ import com.posada.santiago.alphapostsandcomments.business.generic.UseCaseForComm
 import com.posada.santiago.alphapostsandcomments.domain.Post;
 import com.posada.santiago.alphapostsandcomments.domain.commands.ChangeTitle;
 import com.posada.santiago.alphapostsandcomments.domain.values.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
+@Slf4j
 @Component
 public class ChangeTitleUseCase extends UseCaseForCommand<ChangeTitle> {
 

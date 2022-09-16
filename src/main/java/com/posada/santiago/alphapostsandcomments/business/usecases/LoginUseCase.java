@@ -3,6 +3,7 @@ package com.posada.santiago.alphapostsandcomments.business.usecases;
 import com.posada.santiago.alphapostsandcomments.application.config.jwt.JwtTokenProvider;
 import com.posada.santiago.alphapostsandcomments.application.generic.models.AuthenticationRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,7 +14,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class LoginUseCase {
