@@ -8,6 +8,7 @@ import com.posada.santiago.alphapostsandcomments.business.usecases.CreatePostUse
 import com.posada.santiago.alphapostsandcomments.domain.commands.AddCommentCommand;
 import com.posada.santiago.alphapostsandcomments.domain.commands.ChangeTitle;
 import com.posada.santiago.alphapostsandcomments.domain.commands.CreatePostCommand;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -17,7 +18,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
-
+@Slf4j
 @Configuration
 public class CommandHandle {
 
@@ -28,6 +29,10 @@ public class CommandHandle {
                 POST("/create/post").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(useCase.apply(request.bodyToMono(CreatePostCommand.class)), DomainEvent.class))
+                        .onErrorResume(error -> {
+                            log.error(error.getMessage());
+                            return ServerResponse.badRequest().build();
+                        })
         );
     }
 
@@ -37,7 +42,10 @@ public class CommandHandle {
         return route(
                 POST("/add/comment").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(useCase.apply(request.bodyToMono(AddCommentCommand.class)), DomainEvent.class))
+                        .body(BodyInserters.fromPublisher(useCase.apply(request.bodyToMono(AddCommentCommand.class)), DomainEvent.class)).onErrorResume(error -> {
+                            log.error(error.getMessage());
+                            return ServerResponse.badRequest().build();
+                        })
         );
     }
 
@@ -47,7 +55,10 @@ public class CommandHandle {
         return route(
                 PUT("/change/title").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(useCase.apply(request.bodyToMono(ChangeTitle.class)), DomainEvent.class))
+                        .body(BodyInserters.fromPublisher(useCase.apply(request.bodyToMono(ChangeTitle.class)), DomainEvent.class)).onErrorResume(error -> {
+                            log.error(error.getMessage());
+                            return ServerResponse.badRequest().build();
+                        })
         );
     }
 }

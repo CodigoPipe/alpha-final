@@ -36,6 +36,7 @@ public class AddCommentUseCase extends UseCaseForCommand<AddCommentCommand> {
                     return post.getUncommittedChanges();
                 }).map(event -> {
                     bus.publish(event);
+                    log.info("comment addede succesfully");
                     return event;
                 }).flatMap(event -> repository.saveEvent(event))
         );

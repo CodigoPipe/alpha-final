@@ -33,6 +33,7 @@ public class ChangeTitleUseCase extends UseCaseForCommand<ChangeTitle> {
                     return post.getUncommittedChanges();
                 }).map(event -> {
                     bus.publish(event);
+                    log.info("Title changed succesfully");
                     return event;
                 }).flatMap(repository::saveEvent)
         );
